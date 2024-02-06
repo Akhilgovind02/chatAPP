@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Akhilgovind02/chatAPP/issues"
   },
-  "homepage": "https://github.com/Akhilgovind02/chatAPP#readme"
+  "homepage": "https://github.com/Akhilgovind02/chatAPP#readme",
+  "dependencies": {
+    "nodemon": "^3.0.3"
+  }
 }
