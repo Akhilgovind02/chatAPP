@@ -18,7 +18,8 @@ const server=http.createServer((req,res)=>{
         });
     }
     if(path.pathname=="/postchat"){
-        let datastr="<p>"+path.query.txtName+":"+path.query.txtMsg+"</p><br>";
+        const date = new Date();
+        let datastr="<p>"+path.query.txtName+":"+path.query.txtMsg+":"+date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+"/"+date.getHours()+":"+date.getMinutes()+"</p><br>";
         fs.appendFile('chatTxt.txt',datastr,()=>{});
         return res.end("<h1>Chat Entered</h1>");
     }
