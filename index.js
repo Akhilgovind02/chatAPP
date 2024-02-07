@@ -1,24 +1,42 @@
-const http = require('http')
-const fs = require('fs')
-const url = require('url')
-const server = http.createServer((req,res)=>{
-    res.writeHead(200,{'Content-Type':'text/html'})
-
-    var s = url.parse(req.url,true)
-    if(s.pathname == '/enterchat'){
-        fs.readFile('./enterchat.html',(err,data) =>{
-            if(err){
-                return res.end("<p align='center></p>")
-            }else{
-                return res.end(data)
+const http=require('http');
+const url=require('url');
+const fs=require("fs");
+const server=http.createServer((req,res)=>{
+    const path=url.parse(req.url,true);
+    res.writeHead(200,{'Content-Type':'text/html'});
+    console.log(path.pathname);
+    
+    if(path.pathname=="/chatentry")
+    {
+        fs.readFile('./enterchat.html',(error,data)=>{
+            if(error){
+                return  res.write("<p>Error</p>");
             }
-        })
+            return res.end(data);
+
+
+        });
     }
-    if(s.pathname)
-    if(s.pathname == '/lostchat'){
-        res.write('Display chat');
+    if(path.pathname=="/postchat"){
+        let datastr="<p>"+path.query.txtName+":"+path.query.txtMsg+"</p><br>";
+        fs.appendFile('chatTxt.txt',datastr,()=>{});
+        return res.end("<h1>Chat Entered</h1>");
     }
+    if(path.pathname=="/getchat"){
+        fs.readFile('./chatTxt.txt',(error,data)=>{
+            if(error){
+                return  res.write("<p>Error</p>");
+            }
+            return res.end(data);
+
+
+        });
+    }
+
+
+    
+   
 });
 server.listen(3500,()=>{
-    console.log('server is running');
-})
+    console.log("Server is running @ 3500");
+});

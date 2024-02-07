@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ChatEntry</title>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-    <h3 align="center">Chat APP</h3>
-    <form action="http://192.168.29.150:3500/enterchat" method="get">
-    <label>Enter</label>
-    <input type="text" name="txtChat" ></input>
-    <button>Send</button>
-</form>
+    
+    <table align="center" cellpadding="10" cellspacing="10">
+        <tr><td>EnterChat</td></tr>
+        <tr><td><input type="text" id="txtName" name="txtName" placeholder="NickName"></td></tr>
+        <tr><td><textarea name="txtMsg" id="txtMsg" placeholder="Message"></textarea></td></tr>
+        <tr><td><input type="button" id="btnEnter" value="Enter"></td></tr>
+    </table>
+    <script>
+        $('#btnEnter').click(function(){
+            var name=$('#txtName').val();
+            var msg=$('#txtMsg').val();
+            $.ajax({
+                type:'get',
+                url:'http://192.168.29.173:3500/postchat?txtName=sam&txtMsg=hello',
+                success:function(data){
+                    alert("Chat Entered");
+
+                }
+
+            });
+        });
+    </script>
+
 </body>
 </html>
