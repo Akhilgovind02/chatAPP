@@ -27,6 +27,11 @@
 
     </div>
     <script>
+        const subscription = new EventSource('http://192.168.29.173:3500/getchat');
+        subscription.addEventListener('message', (event) => {
+            //$('.chatContainer').html(data);
+            console.log(event.data);
+            });
         function getchat(){
             $.ajax({
                 method:'get',
